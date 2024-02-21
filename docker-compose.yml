@@ -1,17 +1,27 @@
 version: '3.7'
 
 services:
+#Service Item-db
   item-db:
+#Menggunakan image mongo:3 dari docker hub
     image: mongo:3
+#Always restart the container if it stops.
+    restart: always
+#Attach Volume
     volumes:
       - app-db:/data/db
+#Service Item-app
   item-app:
+#Menggunakan image yang sudah di push ke dockerhub
     image: hiroominan/item-app:v1
+#Always restart the container if it stops.
     restart: always
+#Publish port container 8080 ke port 80 host
     ports:
       - "80:8080"
+#Memerlukan service item-db untuk berjalan
     depends_on:
       - item-db
-
+#Create Volume
 volumes:
   app-db:
