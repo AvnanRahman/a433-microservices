@@ -6,7 +6,7 @@ services:
     volumes:
       - app-db:/data/db
   item-app:
-    image: hiroominan/microservices-proyek-pertama:v1
+    image: hiroominan/item-app:v1
     restart: always
     ports:
       - "80:8080"
