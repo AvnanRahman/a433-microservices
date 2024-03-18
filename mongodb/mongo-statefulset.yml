@@ -30,6 +30,13 @@ spec:
           value: /etc/mongo-credentials/MONGO_ROOT_USERNAME
         - name: MONGO_INITDB_ROOT_PASSWORD_FILE
           value: /etc/mongo-credentials/MONGO_ROOT_PASSWORD
+      volumes:
+        - name: mongo-config
+          configMap:
+            name: mongo-config
+        - name: mongo-credentials
+          secret:
+            secretName: mongo-secret
   volumeClaimTemplates:
   - metadata:
       name: mongo-persistent-storage
@@ -38,10 +45,3 @@ spec:
       resources:
         requests:
           storage: 1Gi
-  volumeMounts:
-  - name: mongo-config
-    configMap:
-      name: mongo-config
-  - name: mongo-credentials
-    secret:
-      secretName: mongo-secret
