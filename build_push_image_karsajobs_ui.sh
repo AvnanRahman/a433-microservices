@@ -2,7 +2,7 @@
 # Set variable tentang images
 image_name="karsajobs-ui"
 image_version="latest"
-username_github="afnanrahman"
+username_github="avnanrahman"
 package_name="$username_github/$image_name:$image_version"
 
 # Build docker image
@@ -14,13 +14,15 @@ echo -e "Set image tag sesuai format GitHub Container Registry..."
 docker tag $package_name ghcr.io/$package_name
 
 # List available images
-echo -e "Printing list of Docker Images"
+echo -e "Printing list of Docker Images..."
 docker images
 
 # Login ke github CR
+echo -e "Login ke Github CR..."
 docker login ghcr.io -u $username_github -p $GCR_TOKEN
 
 # Push image ke github CR
+echo -e "Push Image ke Github CR..."
 docker push ghcr.io/$package_name
 
 echo -e "\nDone."
