@@ -7,7 +7,7 @@ package_name="$username_github/$image_name:$image_version"
 
 # Build docker image
 echo -e "Building frontend karsajobs-ui images..."
-docker build -t . $package_name
+docker build . -t $package_name
 
 # Set tag baru untuk image yang telah di build
 echo -e "Set image tag sesuai format GitHub Container Registry..."
