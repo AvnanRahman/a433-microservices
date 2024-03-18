@@ -1,0 +1,42 @@
+# Nama GitHub Actions Workflow
+name: Backend - KarsaJobs
+
+# Set Trigger Github Action
+on:
+    push:
+        branches:
+            - karsajobs
+
+jobs:
+    karsajobs:
+        name: Build-and-Push
+
+        runs-on: ubuntu-latest
+
+        # Mendeklarasikan langkah-langkah tugas yang akan dijalankan
+        steps:
+            # Checkout Repo Ke Runner
+            - name: checkout-repository
+              uses: actions/checkout@v4
+
+            # Install hadolint
+            - name: lint-dockerfile
+              uses: hadolint/hadolint-action@v3.1.0
+              with:
+                dockerfile: "Dockerfile"
+
+            # Menjalankan Unit Test Untuk Backend
+            - name: test-app
+              run: go test -v -short --count=1 $(go list ./...)
+
+            # Step Build dan Push
+            - name: build-and-push
+              env:
+              # personal access token disimpan pada repository secrets GitHub
+                GCR_TOKEN: ${{ secrets.GCR_TOKEN }}
+              # Menjalankan script build dan push
+              run: |
+                export GCR_TOKEN=$GCR_TOKEN
+                bash ./build_push_image_karsajobs.sh
+
+
