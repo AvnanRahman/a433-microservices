@@ -38,7 +38,7 @@ spec:
       resources:
         requests:
           storage: 1Gi
-  volumes:
+  volumeMounts:
   - name: mongo-config
     configMap:
       name: mongo-config
