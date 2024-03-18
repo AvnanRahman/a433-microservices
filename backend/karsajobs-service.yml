@@ -9,3 +9,7 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 8080
+  type: NodePort
+  externalIPs:
+    - 172.22.254.39
+  nodePort: 30002
