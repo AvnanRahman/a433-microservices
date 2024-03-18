@@ -29,7 +29,7 @@ jobs:
             - name: build-and-push
               env:
               # personal access token disimpan pada repository secrets GitHub
-              GCR_TOKEN: ${{ secrets.GCR_TOKEN }}
+                GCR_TOKEN: ${{ secrets.GCR_TOKEN }}
               # Menjalankan script build dan push
               run: |
                 export GCR_TOKEN=$GCR_TOKEN
