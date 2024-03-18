@@ -3,7 +3,7 @@
 image_name="karsajobs-ui"
 image_version="latest"
 username_github="afnanrahman"
-package="$username_github/$image_name:$image_version"
+package_name="$username_github/$image_name:$image_version"
 
 # Build docker image
 echo -e "Building frontend karsajobs-ui images..."
