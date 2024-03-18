@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: karsajobs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: karsajobs
+  template:
+    metadata:
+      labels:
+        app: karsajobs
+    spec:
+      containers:
+      - name: karsajobs
+        image: ghcr.io/avnanrahman/karsajobs:latest
+        resources:
+          requests:
+            memory: "128Mi" # 128Mi = 128 mebibytes
+            cpu: "500m" # 500m = 500 milliCPUs (1/2 CPU)
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+        env:
+        - name: APP_PORT
+          value: "8080"
+        - name: MONGO_HOST
+          value: "mongo"
+        - name: MONGO_USER
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: mongo-root-username
+        - name: MONGO_PASS
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: mongo-root-password
