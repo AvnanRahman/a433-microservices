@@ -73,3 +73,5 @@ Tambahkan data source Prometheus, masukan nilai URL saat mengexpose service prom
 
 Login dan Create panel, import dari https://grafana.com/grafana/dashboards/6417-kubernetes-cluster-prometheus/ atau ID 6417
 
+Referensi: https://semaphoreci.com/blog/prometheus-grafana-kubernetes-helm
+
