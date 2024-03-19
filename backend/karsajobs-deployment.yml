@@ -33,15 +33,15 @@ spec:
         # Set env MONGO_HOST, disini menggunakan nama
         - name: MONGO_HOST
           value: "mongo"
-        # Set env MONGO_USER dari nilai mongo-root-username pada mongo-credentials
+        # Set env MONGO_USER dari nilai MONGO_ROOT_USERNAME pada mongo-credentials
         - name: MONGO_USER
           valueFrom:
             secretKeyRef:
               name: mongo-credentials
-              key: mongo-root-username
-        # Set env MONGO_PASS dari nilai mongo-root-password pada mongo-credentials
+              key: MONGO_ROOT_USERNAME
+        # Set env MONGO_PASS dari nilai MONGO_ROOT_PASSWORD pada mongo-credentials
         - name: MONGO_PASS
           valueFrom:
             secretKeyRef:
               name: mongo-credentials
-              key: mongo-root-password
+              key: MONGO_ROOT_PASSWORD

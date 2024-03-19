@@ -7,7 +7,7 @@ spec:
     app: karsajobs # Selector untuk menentukan pod yang dipilih
   ports:
     - protocol: TCP
-      port: 80 # Port yang di-expose di dalam cluster
+      port: 8080 # Port yang di-expose di dalam cluster
       targetPort: 8080 # Port target pada pod
       nodePort: 30002 # expose port 30002, agar bisa diakses menggunakan ip minikube
   type: NodePort # Tipe Service
