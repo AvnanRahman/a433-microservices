@@ -32,10 +32,10 @@ spec:
         - name: MONGO_USER
           valueFrom:
             secretKeyRef:
-              name: mongo-secret
+              name: mongo-credentials
               key: mongo-root-username
         - name: MONGO_PASS
           valueFrom:
             secretKeyRef:
-              name: mongo-secret
+              name: mongo-credentials
               key: mongo-root-password
