@@ -7,7 +7,7 @@ spec:
     app: karsajobs-ui # Selector untuk menargetkan pod yang sesuai
   ports:
     - protocol: TCP
-      port: 80
+      port: 8000
       targetPort: 8000 # Port di dalam pod yang dituju
       nodePort: 30001 # Port yang akan di-expose di node
   type: NodePort # Jenis Service
