@@ -1,29 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: karsajobs-ui
+  name: karsajobs-ui # Nama Deployment
 spec:
-  replicas: 1
+  replicas: 1  # Jumlah replika yang diinginkan
   selector:
     matchLabels:
-      app: karsajobs-ui
+      app: karsajobs-ui # Selector untuk menentukan pod yang dipilih
   template:
     metadata:
       labels:
-        app: karsajobs-ui
+        app: karsajobs-ui # Label untuk pod yang dihasilkan
     spec:
       containers:
-      - name: karsajobs-ui
-        image: ghcr.io/avnanrahman/karsajobs-ui:latest
+      - name: karsajobs-ui # Set Nama Container
+        image: ghcr.io/avnanrahman/karsajobs-ui:latest # Menggunakan Image yang sudah di build sebelumnya
+        # Set Limit dari resource yang akan digunakan
         resources:
           requests:
-            memory: "512Mi" # 512Mi = 512 mebibytes
-            cpu: "1000m" # 1000m = 1000 milliCPUs (1 CPU)
+            memory: "512Mi" # # Permintaan memori, 512Mi = 512 mebibytes
+            cpu: "1000m" # Permintaan CPU, 1000m = 1000 milliCPUs (1 CPU)
           limits:
-            memory: "512Mi"
-            cpu: "1000m"
+            memory: "512Mi" # Batas memori
+            cpu: "1000m" # Batas CPU
+        # Set containerPort ke 8000
         ports:
         - containerPort: 8000
         env:
+        # Set env VUE_APP_BACKEND untuk terhubung ke backend
         - name: VUE_APP_BACKEND
           value: http://192.168.49.2:30002

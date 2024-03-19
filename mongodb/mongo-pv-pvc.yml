@@ -1,26 +1,26 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: mongo-pv
+  name: mongo-pv # Nama PersistentVolume
 spec:
-  storageClassName: manual
+  storageClassName: manual # Kelas penyimpanan yang digunakan
   capacity:
-    storage: 1Gi
+    storage: 1Gi # Kapasitas penyimpanan yang dialokasikan
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteOnce # Mode akses: Baca Tulis Sekali
   hostPath:
-    path: "/data/db"
+    path: "/data/db" # Path host di mana volume akan di-mount
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mongo-pvc
+  name: mongo-pvc # Nama PersistentVolumeClaim
   labels:
-    app: monggo
+    app: monggo # Label aplikasi
 spec:
-  storageClassName: manual
+  storageClassName: manual # Kelas penyimpanan yang digunakan
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteOnce # Mode akses: Baca Tulis Sekali
   resources:
     requests:
-      storage: 1Gi
+      storage: 1Gi # Permintaan kapasitas penyimpanan

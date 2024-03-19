@@ -1,39 +1,45 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: karsajobs
+  name: karsajobs # Nama Deployment
 spec:
-  replicas: 1
+  replicas: 1 # Jumlah replika
   selector:
     matchLabels:
-      app: karsajobs
+      app: karsajobs # Selector untuk menentukan pod yang dipilih
   template:
     metadata:
       labels:
-        app: karsajobs
+        app: karsajobs # Label untuk pod
     spec:
       containers:
-      - name: karsajobs
-        image: ghcr.io/avnanrahman/karsajobs:latest
+      - name: karsajobs # Set Nama Container
+        image: ghcr.io/avnanrahman/karsajobs:latest # Menggunakan Image yang sudah di build sebelumnya
+        # Set Limit dari resource yang akan digunakan
         resources:
           requests:
             memory: "128Mi" # 128Mi = 128 mebibytes
             cpu: "500m" # 500m = 500 milliCPUs (1/2 CPU)
           limits:
-            memory: "128Mi"
-            cpu: "500m"
+            memory: "128Mi" # Memory maksimum
+            cpu: "500m" # CPU maksimum
+        # Set containerPort ke 8080
         ports:
         - containerPort: 8080
         env:
+        # Set env APP_PORT ke 8080
         - name: APP_PORT
           value: "8080"
+        # Set env MONGO_HOST, disini menggunakan nama
         - name: MONGO_HOST
           value: "mongo"
+        # Set env MONGO_USER dari nilai mongo-root-username pada mongo-credentials
         - name: MONGO_USER
           valueFrom:
             secretKeyRef:
               name: mongo-credentials
               key: mongo-root-username
+        # Set env MONGO_PASS dari nilai mongo-root-password pada mongo-credentials
         - name: MONGO_PASS
           valueFrom:
             secretKeyRef:

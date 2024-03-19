@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: karsajobs-service
+  name: karsajobs-service # Nama Service
 spec:
   selector:
-    app: karsajobs
+    app: karsajobs # Selector untuk menentukan pod yang dipilih
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 8080
-      nodePort: 30002
-  type: NodePort
+      port: 80 # Port yang di-expose di dalam cluster
+      targetPort: 8080 # Port target pada pod
+      nodePort: 30002 # expose port 30002, agar bisa diakses menggunakan ip minikube
+  type: NodePort # Tipe Service

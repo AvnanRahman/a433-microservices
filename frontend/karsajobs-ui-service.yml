@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: karsajobs-ui-service
+  name: karsajobs-ui-service # Nama Service
 spec:
   selector:
-    app: karsajobs-ui
+    app: karsajobs-ui # Selector untuk menargetkan pod yang sesuai
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8000
-      nodePort: 30001
-  type: NodePort
+      targetPort: 8000 # Port di dalam pod yang dituju
+      nodePort: 30001 # Port yang akan di-expose di node
+  type: NodePort # Jenis Service

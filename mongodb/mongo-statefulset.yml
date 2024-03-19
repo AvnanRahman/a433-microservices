@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mongo
+  name: mongo # Nama StatefulSet
   labels:
-    app: mongo
+    app: mongo # Label aplikasi
 spec:
-  replicas: 1
-  serviceName: "mongo"
+  replicas: 1 # Jumlah replika StatefulSet
+  serviceName: "mongo" # Nama layanan yang akan digunakan oleh StatefulSet
   selector:
     matchLabels:
       app: mongo
       tier: data
-  minReadySeconds: 10
+  minReadySeconds: 10 # Jumlah waktu minimum yang harus dijalankan oleh pod baru sebelum dianggap siap
   template:
     metadata:
       labels:
@@ -20,25 +20,25 @@ spec:
     spec:
       terminationGracePeriodSeconds: 10
       containers:
-      - name: mongo
-        image: mongo:4.4
+      - name: mongo # Nama kontainer
+        image: mongo:4.4 # Menggunakan image mongo 4.4 
         ports:
-        - containerPort: 27017
+        - containerPort: 27017 # Port yang akan digunakan oleh kontainer
         env:
-        - name: MONGO_INITDB_ROOT_USERNAME
+        - name: MONGO_INITDB_ROOT_USERNAME # Nama env untuk username root MongoDB
           valueFrom:
             secretKeyRef:
-              name: mongo-credentials
-              key: mongo-root-username
-        - name: MONGO_INITDB_ROOT_PASSWORD
+              name: mongo-credentials # Nama Secret yang berisi kredensial MongoDB
+              key: mongo-root-username # Key di dalam Secret yang berisi nama pengguna root MongoDB
+        - name: MONGO_INITDB_ROOT_PASSWORD # Nama env untuk password root MongoDB
           valueFrom:
             secretKeyRef:
-              name: mongo-credentials
-              key: mongo-root-password
+              name: mongo-credentials # Nama Secret yang berisi kredensial MongoDB
+              key: mongo-root-password # Key di dalam Secret yang berisi kata sandi pengguna root MongoDB
         volumeMounts:
-        - name: mongo-persistent-storage
-          mountPath: /data/db
+        - name: mongo-persistent-storage # Nama volume untuk penyimpanan persisten MongoDB
+          mountPath: /data/db # Path di dalam kontainer tempat volume akan dipasang
       volumes:
-      - name: mongo-persistent-storage
+      - name: mongo-persistent-storage # Nama volume persisten
         persistentVolumeClaim:
-          claimName: mongo-pvc
+          claimName: mongo-pvc # Nama klaim volume persisten yang akan digunakan
