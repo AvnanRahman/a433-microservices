@@ -17,10 +17,10 @@ spec:
         image: ghcr.io/avnanrahman/karsajobs-ui:latest
         resources:
           requests:
-            memory: "128Mi" # 128Mi = 128 mebibytes
-            cpu: "500m" # 500m = 500 milliCPUs (1/2 CPU)
+            memory: "512Mi" # 512Mi = 512 mebibytes
+            cpu: "1000m" # 1000m = 1000 milliCPUs (1 CPU)
           limits:
-            memory: "128Mi"
-            cpu: "500m"
+            memory: "512Mi"
+            cpu: "1000m"
         ports:
         - containerPort: 80
