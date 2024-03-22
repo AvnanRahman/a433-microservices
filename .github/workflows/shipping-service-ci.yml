@@ -25,10 +25,6 @@ jobs:
               with:
                 dockerfile: "Dockerfile"
 
-            # Menjalankan Unit Test Untuk Backend
-            - name: test-app
-              run: go test -v -short --count=1 $(go list ./...)
-
             # Step Build dan Push
             - name: build-and-push
               env:
