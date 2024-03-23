@@ -2,55 +2,55 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: marketplace-gateway
+  name: marketplace-gateway # Nama gateway untuk koneksi masuk
 spec:
   selector:
     istio: ingressgateway # use istio default controller
   servers:
   - port:
-      number: 80
+      number: 80 # Port yang digunakan
       name: http
-      protocol: HTTP
+      protocol: HTTP # Protokol yang digunakan
     hosts:
-    - "*"
+    - "*" # Mengizinkan host apa pun
 ---
 # VirtualService Configuration for Order Service
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: order
+  name: order # Nama VirtualService untuk layanan pesanan
 spec:
   hosts:
-  - "*"
+  - "*" # Mengizinkan host apa pun
   gateways:
-  - marketplace-gateway
+  - marketplace-gateway # Mengarahkan ke gateway marketplace
   http:
   - match:
     - uri:
-        exact: /order
+        exact: /order # Memasangkan URI yang tepat untuk layanan pesanan
     route:
     - destination:
-        host: order-service
+        host: order-service # Menentukan host layanan pesanan
         port:
-          number: 3000
+          number: 3000 # Port yang digunakan oleh layanan pesanan
 ---
 # VirtualService Configuration for Shipping Service
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: shipping
+  name: shipping # Nama VirtualService untuk layanan pengiriman
 spec:
   hosts:
-  - "*"
+  - "*" # Mengizinkan host apa pun
   gateways:
-  - marketplace-gateway
+  - marketplace-gateway # Mengarahkan ke gateway marketplace
   http:
   - match:
     - uri:
-        exact: /shipping
+        exact: /shipping # Memasangkan URI yang tepat untuk layanan pengiriman
     route:
     - destination:
-        host: shipping-service
+        host: shipping-service # Menentukan host layanan pengiriman
         port:
-          number: 3001
+          number: 3001 # Port yang digunakan oleh layanan pengiriman
  

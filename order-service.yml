@@ -18,7 +18,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order
+  name: order # Nama Deployment untuk layanan pesanan
 spec:
   selector:
     matchLabels:
@@ -30,13 +30,14 @@ spec:
     spec:
       containers:
       - name: order
-        image: ghcr.io/avnanrahman/order-service:latest
+        image: ghcr.io/avnanrahman/order-service:latest # menggunakan image yang sudah dibuat sebelumnya
+        # Limit resource yang digunakan
         resources:
           limits:
             memory: "128Mi"
             cpu: "500m"
         ports:
-        - containerPort: 3000
+        - containerPort: 3000 # set conatiner atau pod port
         env:
         - name: AMQP_URL
-          value: "amqp://user:BOhI5B1u67WaY0m2@my-release-rabbitmq.marketplace.svc.cluster.local:5672"
+          value: "amqp://user:BOhI5B1u67WaY0m2@my-release-rabbitmq.marketplace.svc.cluster.local:5672" # ENV RabbitMq

@@ -68,6 +68,12 @@ kubectl get virtualservice -n marketplace
 minikube tunnel
 
 ## 7. Curl order
+Cek ip Istio dengan
+```
+kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+```
+Curl
+```
 curl -X POST -H "Content-Type: application/json" -d '{
     "order": {
         "book_name": "Harry Potter",
@@ -76,6 +82,7 @@ curl -X POST -H "Content-Type: application/json" -d '{
         "shipping_address": "Jl. Batik Kumeli no 50 Bandung"
     }
 }' http://10.96.112.191/order
+```
 
 ## 8. Cek log Shipping
 ```
