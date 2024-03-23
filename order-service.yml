@@ -1,0 +1,42 @@
+# Service Configuration
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-service # Nama Service
+spec:
+  selector:
+    app: order # Selector untuk menentukan pod yang dipilih
+  ports:
+    - protocol: TCP
+      port: 3000 # Port yang di-expose di dalam cluster
+      name: http
+      targetPort: 3000 # Port target pada pod
+      nodePort: 30000 # expose port 30000, agar bisa diakses menggunakan ip minikube
+  type: NodePort # Tipe Service
+---
+# Deployment Configuration
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order
+spec:
+  selector:
+    matchLabels:
+      app: order
+  template:
+    metadata:
+      labels:
+        app: order
+    spec:
+      containers:
+      - name: order
+        image: ghcr.io/avnanrahman/order-service:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000
+        env:
+        - name: AMQP_URL
+          value: "amqp://user:BOhI5B1u67WaY0m2@my-release-rabbitmq.marketplace.svc.cluster.local:5672"
